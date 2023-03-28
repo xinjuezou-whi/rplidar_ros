@@ -14,7 +14,7 @@
     <param name="scan_mode" type="string" value="Standard"/>
     <param name="screened_begin" type="int" value="200" if="$(arg screen_out)"/>
     <param name="screened_end" type="int" value="400" if="$(arg screen_out)"/>
-	  <param name="screened_begin" type="int" value="-1" unless="$(arg screen_out)"/>
+    <param name="screened_begin" type="int" value="-1" unless="$(arg screen_out)"/>
     <param name="screened_end" type="int" value="-1" unless="$(arg screen_out)"/>
   </node>
 </launch>
