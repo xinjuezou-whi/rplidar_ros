@@ -90,12 +90,12 @@ void publish_scan(ros::Publisher *pub,
     scan_msg.intensities.resize(node_count);
     scan_msg.ranges.resize(node_count);
     bool reverse_data = (!inverted && reversed) || (inverted && !reversed);
-    int step = node_count / int(360);
+    double step = node_count / 360.0;
     if (!reverse_data)
     {
         for (size_t i = 0; i < node_count; i++)
         {
-            if (i >= screened_begin_raw_ * step && i <= screened_end_raw_ * step)
+            if (i >= int(screened_begin_raw_ * step) && i <= int(screened_end_raw_ * step))
             {
                 scan_msg.ranges[i] = std::numeric_limits<float>::infinity();
             }
@@ -114,7 +114,7 @@ void publish_scan(ros::Publisher *pub,
     {
         for (size_t i = 0; i < node_count; i++)
         {
-            if (i >= screened_begin_raw_ * step && i <= screened_end_raw_ * step)
+            if (i >= int(screened_begin_raw_ * step) && i <= int(screened_end_raw_ * step))
             {
                 scan_msg.ranges[i] = std::numeric_limits<float>::infinity();
             }
