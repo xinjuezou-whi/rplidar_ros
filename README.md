@@ -8,6 +8,14 @@ The range's start is defined aligning with the axis -x, and increases clockwise 
 
 ## Range screening
 Added argument "screen_off" controls whether to screen off the data withing specified range(0-360 degrees). The intended screening off range can be set by params: screened_begin and screened_end
+```
+<arg name="screen_off" default="false"/>
+
+<param name="screened_begin" type="int" value="190" if="$(arg screen_off)"/>
+<param name="screened_end" type="int" value="260" if="$(arg screen_off)"/>
+<param name="screened_begin" type="int" value="-1" unless="$(arg screen_off)"/>
+<param name="screened_end" type="int" value="-1" unless="$(arg screen_off)"/>
+```
 
 Let's say that degrees from 180 degrees to 270 degrees should be screened off since the data within this range are interferenced with the mast behind the LiDAR. Then we can set the param "screened_begin" as 180 and "screened_end" as 270 in launch file "rplidar.launch", the argument can be set to true directly in launch file, or specified in command line while launching, like this:
 ```
