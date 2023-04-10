@@ -11,13 +11,13 @@ Added argument "screen_off" controls whether to screen off the data withing spec
 ```
 <arg name="screen_off" default="false"/>
 
-<param name="screened_begin" type="int" value="190" if="$(arg screen_off)"/>
+<param name="screened_begin" type="int" value="100" if="$(arg screen_off)"/>
 <param name="screened_end" type="int" value="260" if="$(arg screen_off)"/>
 <param name="screened_begin" type="int" value="-1" unless="$(arg screen_off)"/>
 <param name="screened_end" type="int" value="-1" unless="$(arg screen_off)"/>
 ```
 
-Let's say that degrees from 180 degrees to 270 degrees should be screened off since the data within this range are interferenced with the mast behind the LiDAR. Then we can set the param "screened_begin" as 180 and "screened_end" as 270 in launch file "rplidar.launch", the argument can be set to true directly in launch file, or specified in command line while launching, like this:
+Let's say that degrees from 90 degrees to 270 degrees should be screened off since the data within this range are interferenced with the mast behind the LiDAR. Then we can set the param "screened_begin" as 90 and "screened_end" as 270 in launch file "rplidar.launch", the argument can be set to true directly in launch file, or specified in command line while launching, like this:
 ```
 roslaunch rplidar_ros rplidar.launch screen_off:=true
 ```
