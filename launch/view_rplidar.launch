@@ -2,10 +2,10 @@
 <!-- revised by WHI -->
 <launch>
   <!-- Arguments -->
-  <arg name="screen_out" default="false"/>
+  <arg name="screen_off" default="false"/>
 
   <include file="$(dirname)/rplidar.launch">
-    <arg name="screen_out" value="$(arg screen_out)"/>
+    <arg name="screen_off" value="$(arg screen_off)"/>
   </include>
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find rplidar_ros)/rviz/rplidar.rviz" />

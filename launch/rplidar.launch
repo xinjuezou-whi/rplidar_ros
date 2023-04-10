@@ -2,7 +2,7 @@
 <!-- revised by WHI -->
 <launch>
   <!-- Arguments -->
-  <arg name="screen_out" default="false"/>
+  <arg name="screen_off" default="false"/>
 
   <node name="rplidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen">
     <param name="serial_port" type="string" value="/dev/lidar"/>
@@ -12,9 +12,9 @@
     <param name="inverted" type="bool" value="false"/>
     <param name="angle_compensate" type="bool" value="true"/>
     <param name="scan_mode" type="string" value="Standard"/>
-    <param name="screened_begin" type="int" value="200" if="$(arg screen_out)"/>
-    <param name="screened_end" type="int" value="400" if="$(arg screen_out)"/>
-    <param name="screened_begin" type="int" value="-1" unless="$(arg screen_out)"/>
-    <param name="screened_end" type="int" value="-1" unless="$(arg screen_out)"/>
+    <param name="screened_begin" type="int" value="190" if="$(arg screen_off)"/>
+    <param name="screened_end" type="int" value="260" if="$(arg screen_off)"/>
+    <param name="screened_begin" type="int" value="-1" unless="$(arg screen_off)"/>
+    <param name="screened_end" type="int" value="-1" unless="$(arg screen_off)"/>
   </node>
 </launch>
