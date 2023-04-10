@@ -53,8 +53,8 @@ using namespace sl;
 ILidarDriver * drv = NULL;
 
 // revised by WHI for range screen out
-static int screenedBegin = 91;
-static int screenedEnd = 179;
+static int screened_begin_raw_ = 91;
+static int screened_end_raw_ = 179;
 
 void publish_scan(ros::Publisher *pub,
                   sl_lidar_response_measurement_node_hq_t *nodes,
@@ -90,11 +90,12 @@ void publish_scan(ros::Publisher *pub,
     scan_msg.intensities.resize(node_count);
     scan_msg.ranges.resize(node_count);
     bool reverse_data = (!inverted && reversed) || (inverted && !reversed);
+    double step = node_count / 360.0;
     if (!reverse_data)
     {
         for (size_t i = 0; i < node_count; i++)
         {
-            if (i >= screenedBegin && i <= screenedEnd)
+            if (i >= int(screened_begin_raw_ * step) && i <= int(screened_end_raw_ * step))
             {
                 scan_msg.ranges[i] = std::numeric_limits<float>::infinity();
             }
@@ -113,7 +114,7 @@ void publish_scan(ros::Publisher *pub,
     {
         for (size_t i = 0; i < node_count; i++)
         {
-            if (i >= screenedBegin && i <= screenedEnd)
+            if (i >= int(screened_begin_raw_ * step) && i <= int(screened_end_raw_ * step))
             {
                 scan_msg.ranges[i] = std::numeric_limits<float>::infinity();
             }
@@ -264,8 +265,8 @@ int main(int argc, char * argv[]) {
     else{
         nh_private.param<double>("scan_frequency", scan_frequency, 10.0);
     }
-    nh_private.param<int>("screened_begin", screenedBegin, -1);
-	nh_private.param<int>("screened_end", screenedEnd, -1);
+    nh_private.param<int>("screened_begin", screened_begin_raw_, -1);
+	nh_private.param<int>("screened_end", screened_end_raw_, -1);
 
     int ver_major = SL_LIDAR_SDK_VERSION_MAJOR;
     int ver_minor = SL_LIDAR_SDK_VERSION_MINOR;
