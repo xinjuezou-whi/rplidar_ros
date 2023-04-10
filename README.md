@@ -1,3 +1,23 @@
+# WHI exteded RPLIDAR ROS package
+This package forked from the offical repository with the extended functionality of scan range screening
+
+## Range definition of laser frame
+The range's start is defined aligning with the axis -x, and increases clockwise up to 360 degrees:
+![image](https://user-images.githubusercontent.com/72239958/230850302-8ff34f75-b9c4-4fd8-a4f7-069e2522ffdf.png)
+
+
+## Range screening
+Added argument "screen_off" controls whether to screen off the data withing specified range(0-360 degrees). The intended screening off range can be set by params: screened_begin and screened_end. Let's say that degrees from 180 degrees to 270 degrees should be screened off since the data within this range are interferenced with the mast behind the LiDAR. Then we can set the param "screened_begin" as 180 and "screened_end" as 270 in launch file "rplidar.launch", the argument can be set to true directly in launch file, or specified in command line while launching, like this:
+```
+roslaunch rplidar_ros rplidar.launch screen_off:=true
+```
+
+![screened_off](https://user-images.githubusercontent.com/72239958/230855140-6cb6972c-cfcc-491d-9884-7224d6b9fbf4.png)
+
+<br>
+
+> ***Bellowing contents are the original of RPLIDAR ROS package:***
+
 RPLIDAR ROS package
 =====================================================================
 
